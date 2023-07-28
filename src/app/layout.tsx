@@ -1,8 +1,13 @@
-import './globals.css'
+import { Header } from '@/components/Header'
+import StyledComponentsRegistry from '@/lib/styled-components/registry'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Lexend_Deca } from 'next/font/google'
+import { GlobalStyle } from '@/styles/GlobalStyle'
+import { Theme } from '@/theme'
+import { Footer } from '@/components/Footer'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'], variable: '--inter' })
+const lexendDeca = Lexend_Deca({ subsets: ['latin'], variable: '--lexend-deca' })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -15,8 +20,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="pt-Br">
+      <body className={`${lexendDeca.variable} ${inter.variable}`}>
+        <StyledComponentsRegistry>
+          <Theme>
+            <GlobalStyle />
+            <Header />
+            {children}
+            <Footer />
+          </Theme>
+        </StyledComponentsRegistry>
+      </body>
     </html>
   )
 }
